@@ -1,7 +1,8 @@
-[![React](https://img.shields.io/badge/React-18-blue?logo=react)](https://reactjs.org/)
-[![Vite](https://img.shields.io/badge/Vite-^5.0-purple?logo=vite)](https://vitejs.dev/)
-[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-3-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
-[![i18next](https://img.shields.io/badge/i18next-23-blue.svg)](https://www.i18next.com/)
+[![React](https://img.shields.io/badge/React-19-blue?logo=react)](https://reactjs.org/)
+[![Vite](https://img.shields.io/badge/Vite-^7.1-purple?logo=vite)](https://vitejs.dev/)
+[![Tailwind CSS](https://img.shields.io/badge/Tailwind_CSS-4-38B2AC?logo=tailwind-css)](https://tailwindcss.com/)
+[![Google Gemini](https://img.shields.io/badge/Google_Gemini-API-4285F4?logo=google&logoColor=white)](https://ai.google.dev/)
+[![i18next](https://img.shields.io/badge/i18next-25-blue.svg)](https://www.i18next.com/)
 
 # Social Support Application Wizard
 
@@ -22,7 +23,7 @@ This project is a frontend implementation of a 3-step wizard designed to guide u
 
 -   **Responsive 3-Step Wizard**: A clean and intuitive multi-step form that works beautifully on all screen sizes.
 -   **Internationalization (i18n)**: Full support for English (LTR) and Arabic (RTL) with a smooth, animated language toggle.
--   **AI Writing Assistance**: Integrates with the OpenAI API (`gpt-3.5-turbo`) in Step 3 to help users draft their personal statements.
+-   **AI Writing Assistance**: Integrates with the Google Gemini API in Step 3 to help users draft their personal statements.
 -   **Robust Form Handling**: Built with `react-hook-form` for efficient and scalable form state management and validation.
 -   **Smooth Transitions**: Custom circular reveal animation for language switching and fluid step transitions.
 -   **Loading & Error States**: Includes a loading screen for initial language setup and a robust Error Boundary to gracefully handle runtime errors.
@@ -36,7 +37,7 @@ This project is a frontend implementation of a 3-step wizard designed to guide u
 -   **Internationalization**: i18next / react-i18next
 -   **Form Management**: React Hook Form
 -   **Animations**: Custom hooks for UI transitions.
--   **API**: OpenAI Chat Completions API
+-   **API**: Google Gemini API
 
 ## 🚀 Getting Started
 
@@ -65,7 +66,7 @@ Follow these instructions to get a copy of the project up and running on your lo
         ```bash
         cp .env.example .env
         ```
-    -   Open the `.env` file and add your OpenAI API key.
+    -   Open the `.env` file and add your Google Gemini API key.
 
 4.  **Run the development server:**
     ```bash
@@ -75,11 +76,11 @@ Follow these instructions to get a copy of the project up and running on your lo
 
 ## 🔑 Environment Variables
 
-To use the AI writing assistance feature, you need to provide an OpenAI API key.
+To use the AI writing assistance feature, you need to provide a Google Gemini API key.
 
--   `VITE_OPENAI_API_KEY`: Your secret API key from OpenAI.
+-   `VITE_GEMINI_API_KEY`: Your secret API key from Google AI Studio.
 
-You can obtain a key from the OpenAI Platform. The application reads this key from `import.meta.env.VITE_OPENAI_API_KEY` and uses it to make requests to the Chat Completions endpoint with the `gpt-3.5-turbo` model.
+You can obtain a key from Google AI Studio. The application reads this key from `import.meta.env.VITE_GEMINI_API_KEY` and uses it to make requests to the Gemini API.
 
 ## 📈 Future Improvements
 
@@ -92,4 +93,3 @@ You can obtain a key from the OpenAI Platform. The application reads this key fr
 ## 🤝 Contributing
 
 Contributions, issues, and feature requests are welcome! Feel free to check the issues page.
-
