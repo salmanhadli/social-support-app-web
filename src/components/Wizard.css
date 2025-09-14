@@ -1,0 +1,43 @@
+.transition-wrapper {
+  position: relative;
+  overflow: hidden;
+  min-height: 250px;
+}
+
+
+.transition-content {
+  width: 100%;
+}
+
+/* Default slide-out (to the left) */
+.slide-exit {
+  transform: translateX(0%);
+  opacity: 1;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+.slide-exit-active {
+  transform: translateX(-100%);
+  opacity: 0;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+/* Default slide-in (from the right) */
+.slide-enter {
+  transform: translateX(100%);
+  opacity: 0;
+}
+.slide-enter-active {
+  transform: translateX(0%);
+  opacity: 1;
+  transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
+}
+
+/* Override for 'left' direction (going back) */
+.transition-wrapper.slide-left .slide-enter {
+  transform: translateX(-100%);
+}
+.transition-wrapper.slide-left .slide-exit-active {
+  transform: translateX(100%);
+}

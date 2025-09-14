@@ -1,0 +1,74 @@
+@import "tailwindcss";
+
+:root {
+  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
+  line-height: 1.5;
+  font-weight: 400;
+
+  /* color-scheme: light dark; */
+  /* color: rgba(255, 255, 255, 0.87); */
+  /* background-color: #242424; */
+
+  font-synthesis: none;
+  text-rendering: optimizeLegibility;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100dvh;
+  /* Add a gradient background for the glassmorphism effect to pop */
+  /* emerald-600 to emerald-500 */
+  background: linear-gradient(rgba(255, 255, 255, 0.6), rgba(200, 255, 200, 0.4)), url('/bg.png'); 
+  background-size: cover;       /* cover the screen */
+  background-position: center;  /* center the image */
+  background-repeat: no-repeat; /* avoid tiling */
+}
+
+option, select, textarea, input, button {
+  accent-color: #059669;
+}
+
+/* Reset dialog default styles for glassmorphism */
+dialog {
+  background: transparent;
+}
+
+select option {
+  background-color: #059669;
+  color: #e2e8f0;
+}
+
+select option:checked {
+  background-color: #059669; 
+  color: #e2e8f0;
+}
+
+html {
+  scroll-behavior: smooth;
+  font-size: 16px;
+}
+
+/* Add this to prevent the white flash during the circular reveal transition */
+::view-transition-old(root) {
+  /* Keep the old view fully opaque and in place */
+  animation: none;
+}
+
+::view-transition-new(root) {
+  /* We are applying a custom animation with JS, so disable the default one */
+  animation: none;
+}
+
+/* @media (prefers-color-scheme: light) {
+  :root {
+    color: #213547;
+    background-color: #ffffff;
+  }
+  a:hover {
+    color: #747bff;
+  }
+  button {
+    background-color: #f9f9f9;
+  }
+} */
