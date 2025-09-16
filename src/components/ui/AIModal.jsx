@@ -3,6 +3,13 @@ import { useTranslation } from 'react-i18next'
 import SparkleIcon from './SparkleIcon'
 import useChatCompletion from "../../hooks/useChatCompletion"
 import Spinner from '../ui/Spinner'
+import { Textarea } from './Textarea'
+
+function camelCaseToTitle(camelCase) {
+  if (!camelCase) return ''
+  const result = camelCase.replace(/([A-Z])/g, ' $1')
+  return result.charAt(0).toUpperCase() + result.slice(1)
+}
 
 export default function AIModal({
   open,
@@ -43,6 +50,8 @@ export default function AIModal({
     setResponse('')
   }
 
+  const formattedTitle = camelCaseToTitle(title)
+
 
   return (
     <dialog
@@ -52,11 +61,11 @@ export default function AIModal({
         position: 'fixed',
         top: '50%',
         left: '50%',
-        transform: `translate(-${i18n.dir() === 'rtl' ? '100%' : '50%'}, -50%)`,
+        transform: `translate(-${i18n.dir() === 'rtl' ? '75%' : '50%'}, -50%)`,
       }}
-      className='w-full max-w-2xl bg-black/20 backdrop-blur-lg rounded-2xl border border-white/20 shadow-lg text-white p-6 backdrop:bg-black/50 backdrop:backdrop-blur-sm'>
+      className='w-full max-w-2xl backdrop-blur-lg rounded-2xl border border-white/20 shadow-lg p-6 backdrop:bg-black/50 backdrop:backdrop-blur-sm'>
       <div className='flex justify-between items-center mb-4'>
-        <h3 className='text-xl font-semibold'>{t('aiSuggestionTitle')}: {title}</h3>
+        <h3 className='text-xl font-semibold'>{t('aiSuggestionTitle')}: {formattedTitle}</h3>
         <button
           onClick={onClose}
           type='button'
@@ -81,23 +90,22 @@ export default function AIModal({
       <div className='space-y-4'>
         <div>
           <label
-            id='ai-prompt'
-            className='block text-sm font-medium text-green-200'>
+            htmlFor='ai-prompt'
+            className='inline-block mb-1 text-sm font-medium text-[var(--accent-color-light)]'>
             {t('prompt')}
-            <textarea
-              htmlFor='ai-prompt'
-              name='ai-prompt'
-              className='w-full min-h-10 field-sizing-content h-auto mt-1 p-2 border rounded-md bg-white/10 border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition'
-              value={prompt}
-              onChange={(e) => setPrompt(e.target.value)}
-            />
           </label>
+          <Textarea
+            id='ai-prompt'
+            className='min-h-10 h-auto mt-1 p-2'
+            value={prompt}
+            onChange={(e) => setPrompt(e.target.value)}
+          />
           <div className='flex justify-end mt-2'>
             <button
               type='button'
               onClick={generate}
               disabled={loading}
-              className='inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors disabled:bg-green-800 disabled:cursor-not-allowed min-w-[120px]'>
+              className='inline-flex items-center justify-center gap-2 px-4 py-2 rounded-lg bg-[var(--accent-color)] text-white hover:bg-[var(--accent-color-dark)] transition-colors disabled:bg-[var(--accent-color-darker)] disabled:cursor-not-allowed min-w-[120px]'>
               {loading ? <Spinner /> : <SparkleIcon className='w-4 h-4' />}
               {loading ? t('generating') : t('generate')}
             </button>
@@ -106,16 +114,16 @@ export default function AIModal({
         <div>
           <label
             htmlFor='ai-response'
-            className='block text-sm font-medium text-green-200'>
+            className='block text-sm font-medium text-[var(--accent-color-light)]'>
             {t('response')}
           </label>
           <div className='relative'>
-            <textarea
+            <Textarea
               id='ai-response'
               value={response}
               onChange={(e) => setResponse(e.target.value)}
               disabled={loading}
-              className='w-full min-h-40 field-sizing-content h-auto mt-1 p-2 border rounded-md bg-white/10 border-white/30 text-white placeholder-gray-300 focus:ring-2 focus:ring-green-400 focus:border-transparent outline-none transition disabled:opacity-50'
+              className='min-h-40 h-auto mt-1 p-2 disabled:opacity-50'
               aria-label={t('response')}
             />
             {loading && (
@@ -133,14 +141,14 @@ export default function AIModal({
           type='button'
           onClick={handleDiscard}
           disabled={loading}
-          className='px-6 py-2 rounded-lg border border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 transition-colors disabled:opacity-50'>
+          className='px-6 py-2 rounded-lg border border-white/30 bg-white/10 backdrop-blur-md hover:bg-white/20 transition-colors disabled:opacity-50'>
           {t('discard')}
         </button>
         <button
           type='button'
           onClick={handleAccept}
           disabled={loading || !response}
-          className='px-6 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors disabled:bg-green-800 disabled:cursor-not-allowed'>
+          className='px-6 py-2 rounded-lg bg-[var(--accent-color)] text-white hover:bg-[var(--accent-color-dark)] transition-colors disabled:bg-[var(--accent-color-darker)] disabled:cursor-not-allowed'>
           {t('accept')}
         </button>
       </div>

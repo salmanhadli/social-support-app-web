@@ -3,7 +3,7 @@ import React from 'react'
 const Card = React.forwardRef(({ className, ...props }, ref) => (
   <div
     ref={ref}
-    className={`max-w-3xl px-3 mx-auto p-6 md:p-8 bg-black/20 backdrop-blur-md rounded-2xl border border-white/20 shadow-lg text-white ${className}`}
+    className={`max-w-3xl px-3 mx-auto p-6 md:p-8 bg-black/30 backdrop-blur-md rounded-2xl border-white/20 shadow-lg ${className}`}
     {...props}
   />
 ))
@@ -17,7 +17,7 @@ CardHeader.displayName = 'CardHeader'
 const CardTitle = React.forwardRef(({ className, ...props }, ref) => (
   <h1
     ref={ref}
-    className={`text-3xl font-bold text-white ${className}`}
+    className={`text-3xl font-bold ${className}`}
     {...props}
   />
 ))

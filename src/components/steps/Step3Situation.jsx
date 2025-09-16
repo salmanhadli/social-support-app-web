@@ -5,7 +5,7 @@ import { useTranslation } from 'react-i18next'
 import SparkleIcon from '../ui/SparkleIcon'
 import FieldError from '../ui/FieldError'
 import Button from '../ui/Button'
-import { Textarea } from '../../Textarea'
+import { Textarea } from '../ui/Textarea'
 
 const FieldGroup = ({ name, label, handleHelp, helpPrompt, register, errors }) => {
   const { t } = useTranslation()
@@ -15,7 +15,7 @@ const FieldGroup = ({ name, label, handleHelp, helpPrompt, register, errors }) =
         <label htmlFor={name} className='mb-1 font-medium'>
           {label}
         </label>
-        <Button type='button' onClick={() => handleHelp(name, helpPrompt)} variant='link' size='sm' className='mb-1'>
+        <Button type='button' style={{ padding: '0' }} onClick={() => handleHelp(name, helpPrompt)} variant='link' size='sm' className='mb-1'>
           <SparkleIcon className='h-6 w-6' />
           {t('helpWrite')}
         </Button>
@@ -54,32 +54,21 @@ export default function Step3Situation() {
     setModalOpen(false)
   }, [currentField, setValue])
 
+  const fields = ['financialSituation', 'employmentCircumstances', 'reasonForApplying']
+
   return (
     <div className='space-y-4'>
-      <FieldGroup
-        name='financialSituation'
-        label={t('financialSituation')}
-        handleHelp={handleHelp}
-        helpPrompt={t('financialSituationHelp')}
-        register={register}
-        errors={errors}
-      />
-      <FieldGroup
-        name='employmentCircumstances'
-        label={t('employmentCircumstances')}
-        handleHelp={handleHelp}
-        helpPrompt={t('employmentCircumstancesHelp')}
-        register={register}
-        errors={errors}
-      />
-      <FieldGroup
-        name='reasonForApplying'
-        label={t('reasonForApplying')}
-        handleHelp={handleHelp}
-        helpPrompt={t('reasonForApplyingHelp')}
-        register={register}
-        errors={errors}
-      />
+      {fields.map((fieldName) => (
+        <FieldGroup
+          key={fieldName}
+          name={fieldName}
+          label={t(fieldName)}
+          handleHelp={handleHelp}
+          helpPrompt={t(`${fieldName}Help`)}
+          register={register}
+          errors={errors}
+        />
+      ))}
       <AIModal
         open={modalOpen}
         title={currentField}

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import { useTranslation } from 'react-i18next'
-import './SubmissionSuccess.css'
 
 export default function SubmissionSuccess({ onStartNew }) {
   const { t } = useTranslation()
@@ -13,38 +12,65 @@ export default function SubmissionSuccess({ onStartNew }) {
   }, [])
 
   return (
-    <div className={`text-center py-12 ${startAnimation ? 'success-animation' : ''}`}>
-      <div className='inline-block p-4 bg-green-500/20 rounded-full mb-4'>
+    <div className='text-center py-12'>
+      <div className='inline-block p-4 bg-[var(--accent-color)]/20 rounded-full mb-4'>
         <svg
-          className="h-16 w-16"
-          viewBox="0 0 52 52"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
+          className='h-16 w-16'
+          viewBox='0 0 52 52'
+          fill='none'
+          xmlns='http://www.w3.org/2000/svg'>
           <circle
-            className="circle text-green-400"
-            cx="26"
-            cy="26"
-            r="25"
-            stroke="currentColor"
-            strokeWidth="2"
-            fill="none"
+            className='text-[var(--accent-color-light)]'
+            cx='26'
+            cy='26'
+            r='25'
+            stroke='currentColor'
+            strokeWidth='2'
+            fill='none'
+            style={{
+              strokeDasharray: 1000,
+              strokeDashoffset: startAnimation ? 0 : 1000,
+              transition: 'stroke-dashoffset 1s ease-in-out',
+            }}
           />
           <path
-            className="check text-green-400"
-            stroke="currentColor"
-            strokeWidth="3"
+            className='text-[var(--accent-color-light)]'
+            stroke='currentColor'
+            strokeWidth='3'
             strokeLinecap='round'
             strokeLinejoin='round'
-            d="M14 27l5.917 5.917L38.084 17"
+            d='M14 27l5.917 5.917L38.084 17'
+            style={{
+              strokeDasharray: 100,
+              strokeDashoffset: startAnimation ? 0 : 100,
+              transition: 'stroke-dashoffset 0.8s ease-in-out 0.5s',
+            }}
           />
         </svg>
       </div>
-      <h2 className='text-2xl font-bold text-white mb-2 fade-in-up'>{t('submissionSuccessTitle')}</h2>
-      <p className='text-gray-300 mb-8 fade-in-up'>{t('submissionSuccessMessage')}</p>
+      <h2
+        className={`text-2xl font-bold mb-2 transition-all duration-600 ease-out delay-[800ms] ${
+          startAnimation
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-5'
+        }`}>
+        {t('submissionSuccessTitle')}
+      </h2>
+      <p
+        className={`text-[var(--text-secondary)] mb-8 transition-all duration-600 ease-out delay-[800ms] ${
+          startAnimation
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-5'
+        }`}>
+        {t('submissionSuccessMessage')}
+      </p>
       <button
         onClick={onStartNew}
-        className='px-6 py-2 rounded-lg bg-green-600 text-white hover:bg-green-700 transition-colors fade-in-up'>
+        className={`px-6 py-2 rounded-lg bg-[var(--accent-color)] hover:bg-[var(--accent-color-dark)] transition-all duration-600 ease-out delay-[800ms] ${
+          startAnimation
+            ? 'opacity-100 translate-y-0'
+            : 'opacity-0 translate-y-5'
+        }`}>
         {t('startNewApplication')}
       </button>
     </div>

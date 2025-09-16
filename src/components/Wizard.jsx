@@ -5,8 +5,8 @@ import Step2FamilyFinancial from './steps/Step2FamilyFinancial'
 import Step3Situation from './steps/Step3Situation'
 import ProgressBar from './ui/ProgressBar'
 import { submitApplication } from '../utils/mockApi'
-import Confetti from 'react-confetti'
-import { useWindowSize } from 'react-use'
+// import Confetti from 'react-confetti'
+// import { useWindowSize } from 'react-use'
 import { useLocalFormSave } from '../hooks/useLocalFormSave'
 import { useTranslation } from 'react-i18next'
 import SubmissionSuccess from './SubmissionSuccess'
@@ -72,7 +72,7 @@ export default function Wizard() {
   const [submitting, setSubmitting] = useState(false)
   const [submissionSuccess, setSubmissionSuccess] = useState(false)
   const { t } = useTranslation()
-  const { width, height } = useWindowSize()
+  // const { width, height } = useWindowSize()
 
   React.useEffect(() => {
     const response = load()
@@ -130,13 +130,13 @@ export default function Wizard() {
   if (submissionSuccess) {
     return (
       <>
-        <Confetti
+        {/* <Confetti
           width={width}
           height={height}
           recycle={false}
           numberOfPieces={500}
           tweenDuration={8000}
-        />
+        /> */}
         <Card>
           <SubmissionSuccess onStartNew={handleStartNew} />
         </Card>
@@ -151,7 +151,7 @@ export default function Wizard() {
           <CardHeader>
             <CardTitle>{t('title')}</CardTitle>
             <ProgressBar
-              className='mt-1'
+              className='mt-4'
               step={stepIndex + 1}
               steps={steps.length}
             />

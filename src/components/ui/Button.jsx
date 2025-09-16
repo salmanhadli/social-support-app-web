@@ -2,11 +2,11 @@ import React from 'react'
 
 const buttonVariants = {
   variant: {
-    primary: 'bg-green-600 text-white hover:bg-green-700 disabled:bg-green-800',
+    primary: 'bg-[var(--accent-color)] text-white hover:bg-[var(--accent-color-dark)] disabled:bg-[var(--accent-color-darker)]',
     secondary:
       'border border-white/30 bg-white/10 text-white backdrop-blur-md hover:bg-white/20',
     ghost: 'hover:bg-white/20 transition-colors',
-    link: 'text-green-300 hover:text-green-200 underline',
+    link: 'text-[var(--accent-color-light)] hover:text-[var(--accent-color)] underline',
   },
   size: {
     default: 'px-6 py-2',

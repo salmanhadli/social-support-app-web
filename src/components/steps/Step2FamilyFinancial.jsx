@@ -12,79 +12,83 @@ export default function Step2FamilyFinancial() {
   } = useFormContext()
   const { t } = useTranslation()
   
+  const fields = [
+    {
+      name: 'maritalStatus',
+      type: 'select',
+      validation: { required: t('requiredField') },
+      options: [
+        { value: '', label: t('select') },
+        { value: 'single', label: t('single') },
+        { value: 'married', label: t('married') },
+        { value: 'widowed', label: t('widowed') },
+      ],
+    },
+    {
+      name: 'dependents',
+      type: 'number',
+      validation: { required: t('requiredField') },
+    },
+    {
+      name: 'employmentStatus',
+      type: 'select',
+      validation: { required: t('requiredField') },
+      options: [
+        { value: '', label: t('select') },
+        { value: 'employed', label: t('employed') },
+        { value: 'unemployed', label: t('unemployed') },
+        { value: 'informal', label: t('informal') },
+      ],
+    },
+    {
+      name: 'monthlyIncome',
+      type: 'number',
+      validation: { required: t('requiredField') },
+    },
+    {
+      name: 'housingStatus',
+      type: 'select',
+      validation: { required: t('requiredField') },
+      options: [
+        { value: '', label: t('select') },
+        { value: 'rent', label: t('rent') },
+        { value: 'own', label: t('own') },
+        { value: 'homeless', label: t('homeless') },
+      ],
+    },
+  ]
 
   return (
     <div className='grid grid-cols-1 gap-6 md:grid-cols-2'>
-      <div className='block text-sm'>
-        <label htmlFor='maritalStatus' className='mb-1 font-medium'>{t('maritalStatus')}</label>
-        <Select
-          id='maritalStatus'
-          {...register('maritalStatus', {
-            required: t('requiredField'),
-          })}
-          error={errors.maritalStatus}
-          aria-describedby='maritalStatus-error'>
-          <option value=''>{t('select')}</option>
-          <option value='single'>{t('single')}</option>
-          <option value='married'>{t('married')}</option>
-          <option value='widowed'>{t('widowed')}</option>
-        </Select>
-        <FieldError id='maritalStatus-error' error={errors.maritalStatus} />
-      </div>
-      <div className='block text-sm'>
-        <label htmlFor='dependents' className='mb-1 font-medium'>{t('dependents')}</label>
-        <Input
-          id='dependents'
-          type='number'
-          {...register('dependents', { required: t('requiredField') })}
-          error={errors.dependents}
-          aria-invalid={errors.dependents ? 'true' : 'false'}
-          aria-describedby='dependents-error'
-        />
-        <FieldError id='dependents-error' error={errors.dependents} />
-      </div>
-      <div className='block text-sm'>
-        <label htmlFor='employmentStatus' className='mb-1 font-medium'>{t('employmentStatus')}</label>
-        <Select
-          id='employmentStatus'
-          {...register('employmentStatus', { required: t('requiredField') })}
-          error={errors.employmentStatus}
-          aria-invalid={errors.employmentStatus ? 'true' : 'false'}
-          aria-describedby='employmentStatus-error'>
-          <option value=''>{t('select')}</option>
-          <option value='employed'>{t('employed')}</option>
-          <option value='unemployed'>{t('unemployed')}</option>
-          <option value='informal'>{t('informal')}</option>
-        </Select>
-        <FieldError id='employmentStatus-error' error={errors.employmentStatus} />
-      </div>
-      <div className='block text-sm'>
-        <label htmlFor='monthlyIncome' className='mb-1 font-medium'>{t('monthlyIncome')}</label>
-        <Input
-          id='monthlyIncome'
-          type='number'
-          {...register('monthlyIncome', { required: t('requiredField') })}
-          error={errors.monthlyIncome}
-          aria-invalid={errors.monthlyIncome ? 'true' : 'false'}
-          aria-describedby='monthlyIncome-error'
-        />
-        <FieldError id='monthlyIncome-error' error={errors.monthlyIncome} />
-      </div>
-      <div className='block text-sm'>
-        <label htmlFor='housingStatus' className='mb-1 font-medium'>{t('housingStatus')}</label>
-        <Select
-          id='housingStatus'
-          {...register('housingStatus', { required: t('requiredField') })}
-          error={errors.housingStatus}
-          aria-invalid={errors.housingStatus ? 'true' : 'false'}
-          aria-describedby='housingStatus-error'>
-          <option value=''>{t('select')}</option>
-          <option value='rent'>{t('rent')}</option>
-          <option value='own'>{t('own')}</option>
-          <option value='homeless'>{t('homeless')}</option>
-        </Select>
-        <FieldError id='housingStatus-error' error={errors.housingStatus} />
-      </div>
+      {fields.map(({ name, type = 'text', validation, options }) => {
+        const error = errors[name]
+        return (
+          <div key={name} className='block text-sm'>
+            <label htmlFor={name} className='mb-1 inline-block font-medium'>
+              {t(name)}
+            </label>
+            {type === 'select' ? (
+              <Select id={name} {...register(name, validation)} error={error} aria-describedby={`${name}-error`}>
+                {options.map((opt) => (
+                  <option key={opt.value} value={opt.value}>
+                    {opt.label}
+                  </option>
+                ))}
+              </Select>
+            ) : (
+              <Input
+                id={name}
+                type={type}
+                {...register(name, validation)}
+                error={error}
+                aria-invalid={error ? 'true' : 'false'}
+                aria-describedby={`${name}-error`}
+              />
+            )}
+            <FieldError id={`${name}-error`} error={error} />
+          </div>
+        )
+      })}
     </div>
   )
 }
