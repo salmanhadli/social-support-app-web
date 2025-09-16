@@ -18,14 +18,14 @@
   left: 0;
 }
 .slide-exit-active {
-  transform: translateX(-100%);
+  transform: translateX(-110%);
   opacity: 0;
   transition: transform 300ms ease-in-out, opacity 300ms ease-in-out;
 }
 
 /* Default slide-in (from the right) */
 .slide-enter {
-  transform: translateX(100%);
+  transform: translateX(110%);
   opacity: 0;
 }
 .slide-enter-active {
@@ -36,8 +36,8 @@
 
 /* Override for 'left' direction (going back) */
 .transition-wrapper.slide-left .slide-enter {
-  transform: translateX(-100%);
+  transform: translateX(-110%);
 }
 .transition-wrapper.slide-left .slide-exit-active {
-  transform: translateX(100%);
+  transform: translateX(110%);
 }

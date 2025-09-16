@@ -6,6 +6,7 @@ import i18n from './i18n' // <- import the instance directly
 import { useTranslation } from 'react-i18next'
 import { useCircularRevealTransition } from './hooks/useCircularRevealTransition'
 import ErrorBoundary from './ErrorBoundary'
+import constants from './utils/constants'
 
 export default function App() {
   const { i18n } = useTranslation()
@@ -15,19 +16,23 @@ export default function App() {
 
   useLayoutEffect(() => {
     const initializeLanguage = async () => {
-      const preferredLang = localStorage.getItem('user-language-preference')
+      const preferredLang = localStorage.getItem(
+        constants.USER_LANGUAGE_PREFERENCE
+      )
       if (preferredLang && preferredLang !== i18n.language) {
         await i18n.changeLanguage(preferredLang)
         document.documentElement.dir = i18n.dir(preferredLang)
       }
-      setIsInitializing(false)
+      setTimeout(() => {
+        setIsInitializing(false)
+      }, 500)
     }
     initializeLanguage()
+  // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
-  
 
   async function toggleLang(event) {
-    const next = i18n.language === 'en' ? 'ar' : 'en'
+    const next = i18n.language === constants.EN ? constants.AR : constants.EN
 
     // Ensure i18next is initialized before changing language
     if (!i18n.isInitialized) {
@@ -40,12 +45,12 @@ export default function App() {
     }
 
     try {
-      const nextDir = next === 'ar' ? 'rtl' : 'ltr'
+      const nextDir = next === constants.AR ? constants.RTL : constants.LTR
 
       // Define the DOM update logic that will be transitioned
       const updateDOM = async () => {
         await i18n.changeLanguage(next)
-        localStorage.setItem('user-language-preference', next) // Persist the choice in localStorage
+        localStorage.setItem(constants.USER_LANGUAGE_PREFERENCE, next) // Persist the choice in localStorage
         document.documentElement.dir = nextDir
       }
 
@@ -56,7 +61,6 @@ export default function App() {
     }
   }
 
-
   if (isInitializing) {
     return <LoadingScreen />
   }
@@ -65,15 +69,15 @@ export default function App() {
     <div className='min-h-screen p-4'>
       <div
         className={`flex ${
-          i18n.dir() === 'rtl' ? 'justify-start' : 'justify-end'
+          i18n.dir() === constants.RTL ? 'justify-start' : 'justify-end'
         } mb-2`}>
         <button
           onClick={toggleLang}
           ref={langToggleRef}
-          className='px-4 py-2 min-w-20 rounded-lg border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 transition-colors'
+          className='px-4 py-2 uppercase min-w-20 rounded-lg font-bold border border-white/20 bg-white/10 text-white backdrop-blur-md hover:bg-white/20 transition-colors'
           style={{ WebkitBackdropFilter: 'blur(10px)' }} // Fallback for some browsers
         >
-          {i18n.language === 'en' ? 'عربي' : 'EN'}
+          {i18n.language === constants.EN ? constants.AR : constants.EN}
         </button>
       </div>
       <ErrorBoundary>
