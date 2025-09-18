@@ -5,6 +5,7 @@ import LoadingScreen from './components/ui/LoadingScreen'
 import i18n from './i18n' // <- import the instance directly
 import { useTranslation } from 'react-i18next'
 import { useCircularRevealTransition } from './hooks/useCircularRevealTransition'
+import { Toaster, ErrorIcon } from 'react-hot-toast'
 import ErrorBoundary from './ErrorBoundary'
 import constants from './utils/constants'
 
@@ -28,7 +29,7 @@ export default function App() {
       }, 500)
     }
     initializeLanguage()
-  // eslint-disable-next-line react-hooks/exhaustive-deps
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [])
 
   async function toggleLang(event) {
@@ -67,6 +68,30 @@ export default function App() {
 
   return (
     <div className='min-h-screen p-4'>
+      <Toaster
+        gutter={24}
+        position='top-center'
+        toastOptions={{
+          duration: 5000,
+          style: {
+            maxWidth: '28rem',
+            width: '100%',
+            borderRadius: '2rem',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)', // For Safari
+            boxShadow:
+              '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(0, 0, 0, 0.05)',
+            color: 'white',
+            padding: '20px 20px',
+          },
+          iconTheme: {
+            primary: '#ef4444', // red-500
+            secondary: '#ffffff',
+          },
+        }}
+      />
       <div
         className={`flex ${
           i18n.dir() === constants.RTL ? 'justify-start' : 'justify-end'

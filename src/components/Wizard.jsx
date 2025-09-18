@@ -4,7 +4,7 @@ import Step1Personal from './steps/Step1Personal'
 import Step2FamilyFinancial from './steps/Step2FamilyFinancial'
 import Step3Situation from './steps/Step3Situation'
 import ProgressBar from './ui/ProgressBar'
-import { submitApplication } from '../utils/mockApi'
+import { submitApplication } from '../api/mockApi'
 // import Confetti from 'react-confetti'
 // import { useWindowSize } from 'react-use'
 import { useLocalFormSave } from '../hooks/useLocalFormSave'
@@ -123,6 +123,7 @@ export default function Wizard() {
 
   function handleStartNew() {
     methods.reset({})
+    unload()
     setStepIndex(0)
     setSubmissionSuccess(false)
   }
