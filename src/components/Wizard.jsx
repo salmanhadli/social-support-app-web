@@ -123,6 +123,7 @@ export default function Wizard() {
 
   function handleStartNew() {
     methods.reset({})
+    unload()
     setStepIndex(0)
     setSubmissionSuccess(false)
   }

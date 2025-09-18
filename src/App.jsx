@@ -72,25 +72,23 @@ export default function App() {
         gutter={24}
         position='top-center'
         toastOptions={{
-          error: {
-            duration: 5000,
-            style: {
-              maxWidth: '28rem',
-              width: '100%',
-              borderRadius: '2rem',
-              background: 'rgba(255, 255, 255, 0.1)',
-              backdropFilter: 'blur(16px)',
-              WebkitBackdropFilter: 'blur(16px)', // For Safari
-              boxShadow:
-                '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
-              border: '1px solid rgba(0, 0, 0, 0.05)',
-              color: 'white',
-              padding: '20px 20px',
-            },
-            iconTheme: {
-              primary: '#ef4444', // red-500
-              secondary: '#ffffff',
-            },
+          duration: 5000,
+          style: {
+            maxWidth: '28rem',
+            width: '100%',
+            borderRadius: '2rem',
+            background: 'rgba(255, 255, 255, 0.1)',
+            backdropFilter: 'blur(16px)',
+            WebkitBackdropFilter: 'blur(16px)', // For Safari
+            boxShadow:
+              '0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -4px rgba(0, 0, 0, 0.1)',
+            border: '1px solid rgba(0, 0, 0, 0.05)',
+            color: 'white',
+            padding: '20px 20px',
+          },
+          iconTheme: {
+            primary: '#ef4444', // red-500
+            secondary: '#ffffff',
           },
         }}
       />

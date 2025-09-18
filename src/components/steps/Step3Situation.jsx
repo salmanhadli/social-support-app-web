@@ -7,27 +7,48 @@ import FieldError from '../ui/FieldError'
 import Button from '../ui/Button'
 import { Textarea } from '../ui/Textarea'
 
-const FieldGroup = ({ name, label, handleHelp, helpPrompt, register, errors }) => {
+const FieldGroup = ({
+  name,
+  label,
+  handleHelp,
+  helpPrompt,
+  register,
+  errors,
+}) => {
   const { t } = useTranslation()
   return (
     <div className='block text-sm'>
       <div className='flex items-center justify-between'>
-        <label htmlFor={name} className='mb-1 font-medium'>
+        <label
+          htmlFor={name}
+          className='mb-1 font-medium'>
           {label}
         </label>
-        <Button type='button' style={{ padding: '0' }} onClick={() => handleHelp(name, helpPrompt)} variant='link' size='sm' className='mb-1'>
+        <Button
+          type='button'
+          style={{ padding: '0' }}
+          onClick={() => handleHelp(name, helpPrompt)}
+          variant='link'
+          size='sm'
+          className='mb-1'>
           <SparkleIcon className='h-6 w-6' />
           {t('helpWrite')}
         </Button>
       </div>
       <Textarea
         id={name}
-        {...register(name, { required: t('requiredField') })}
+        {...register(name, {
+          required: t('requiredField'),
+          minLength: { value: 15, message: t('mustBeAtleast15Chars') },
+        })}
         error={errors[name]}
         aria-invalid={errors[name] ? 'true' : 'false'}
         aria-describedby={`${name}-error`}
       />
-      <FieldError id={`${name}-error`} error={errors[name]} />
+      <FieldError
+        id={`${name}-error`}
+        error={errors[name]}
+      />
     </div>
   )
 }
@@ -49,12 +70,20 @@ export default function Step3Situation() {
     setModalOpen(true)
   }, [])
 
-  const acceptSuggestion = useCallback((newText) => {
-    if (currentField) setValue(currentField, newText, { shouldValidate: true })
-    setModalOpen(false)
-  }, [currentField, setValue])
+  const acceptSuggestion = useCallback(
+    (newText) => {
+      if (currentField)
+        setValue(currentField, newText, { shouldValidate: true })
+      setModalOpen(false)
+    },
+    [currentField, setValue]
+  )
 
-  const fields = ['financialSituation', 'employmentCircumstances', 'reasonForApplying']
+  const fields = [
+    'financialSituation',
+    'employmentCircumstances',
+    'reasonForApplying',
+  ]
 
   return (
     <div className='space-y-4'>

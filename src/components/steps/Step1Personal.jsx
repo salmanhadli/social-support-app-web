@@ -61,11 +61,11 @@ export default function Step1Personal() {
       validation: { required: t('requiredField') },
       options: [
         { value: '', label: t('select') },
-        { value: 'EG', label: 'Egypt' },
-        { value: 'SA', label: 'Saudi Arabia' },
-        { value: 'AE', label: 'United Arab Emirates' },
-        { value: 'US', label: 'United States' },
-        { value: 'GB', label: 'United Kingdom' },
+        { value: 'EG', label: t('egypt') },
+        { value: 'SA', label: t('saudiArabia') },
+        { value: 'AE', label: t('unitedArabEmirates') },
+        { value: 'US', label: t('unitedStates') },
+        { value: 'GB', label: t('unitedKingdom') },
       ],
     },
     {

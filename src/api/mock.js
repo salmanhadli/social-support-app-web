@@ -10,7 +10,7 @@ export default (axiosInstance) => {
     try {
       const data = JSON.parse(config.data);
       // Simulate a validation error for demonstration
-      if (!data || !data.personalInfo?.name || data.personalInfo.name.trim() === '') {
+      if (!data || !data?.name || data.name.trim() === '') {
         return [400, { message: 'Validation Error: Name is a required field.' }];
       }
       return [200, { ok: true, id: `mock-${Date.now()}` }];

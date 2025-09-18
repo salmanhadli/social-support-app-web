@@ -16,8 +16,6 @@ mock(axiosInstance);
 // Response interceptor for handling errors globally
 axiosInstance.interceptors.response.use(
   (response) => {
-    // Any status code that lie within the range of 2xx cause this function to trigger
-    // You can also handle successful responses here, e.g. show a success toast
     return response;
   },
   (error) => {
@@ -31,6 +29,8 @@ axiosInstance.interceptors.response.use(
       error.response?.data?.message ||
       error.message ||
       'An unexpected error occurred. Please try again later.';
+
+    // toast notification for errors
     toast.error(message);
 
     return Promise.reject(error);
